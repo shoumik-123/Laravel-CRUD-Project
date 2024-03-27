@@ -41,7 +41,10 @@
                     <td>{{$product->name}}</td>
                     <td>{{$product->description}}</td>
                     <td>
-                        <a class="btn btn-outline-dark btn-sm" >Edit</a>
+                        <a href="product/{{$product->id}}/edit" class="btn btn-outline-dark btn-sm" >Edit</a>
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
             @endforeach

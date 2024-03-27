@@ -42,4 +42,14 @@ class ProductController extends Controller
 
 
     }
+    public function productEdit($ID)
+    {
+        $Product = Product::where('id', $ID)->first();
+        return view('products.edit' ,['product'=>$Product]);
+    }
+    public function productUpdate(Request $request, $ID)
+    {
+
+        redirect('/');
+    }
 }
