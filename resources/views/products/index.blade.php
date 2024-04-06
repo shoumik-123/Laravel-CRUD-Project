@@ -15,20 +15,41 @@
             <li class="nav-item px-4 py-2"><a class="nav-link text-light" href="/">Products</a> </li>
         </ul>
     </nav>
-    <div class="container mx-auto d-">
+
+
+
+    {{--    success alert--}}
+    @if($message = Session::get('success'))
+        <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <script>
+            setTimeout(function() {
+                $('#success-alert').alert('close');
+            }, 5000);
+        </script>
+    @endif
+
+
+
+
+
+
+    <div class="container mx-auto my-5">
         <div class="float-end">
             <button class="btn btn-dark py-2 px-4 mt-3"><a href="{{ route('productCreate')  }}" class="nav-link">New Product</a> </button>
         </div>
-        <h1>Products</h1>
+        <h1 class="my-5">Products</h1>
 
         <table class="table table-striped table-hover">
             <thead>
-                <tr>
+                <tr >
                     <th scope="col">No</th>
                     <th scope="col">Image</th>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Action</th>
+                    <th colspan="2" scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,10 +62,13 @@
                     <td>{{$product->name}}</td>
                     <td>{{$product->description}}</td>
                     <td>
-                        <a href="product/{{$product->id}}/edit" class="btn btn-outline-dark btn-sm" >Edit</a>
+                        <a href="{{ route('productEdit', $product->id) }}" class="btn btn-outline-dark btn-sm" >Edit</a>
                     </td>
                     <td>
-
+                        <form method="post" action="{{ route('productRemove', $product->id ) }}">
+                            @csrf
+                            <button  class="btn bg-warning-subtle btn-sm" type="submit">Remove</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

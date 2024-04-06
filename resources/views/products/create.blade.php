@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-                <form method="POST" action="{{route('productStore')}}" enctype="multipart/form-data">
+                <form method="POST" action="{{route('productStore') , }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label"><b>Name</b></label>

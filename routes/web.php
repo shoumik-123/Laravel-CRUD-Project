@@ -19,6 +19,8 @@ Route::get('/new-product',[ProductController::class , 'productCreate'])->name('p
 
 Route::post('/product-store',[ProductController::class , 'productStore'])->name('productStore');//data create
 
-Route::get('/product/{id}/edit',[ProductController::class , 'productEdit']);//get data by Id
+Route::get('/product/{id}/edit',[ProductController::class , 'productEdit'])->name('productEdit');//get data by Id
 
-Route::post('/product/{id}/update',[ProductController::class , 'productUpdate']);//data update
+Route::post('/product/{id}/update',[ProductController::class , 'productUpdate'])->name('productUpdate');//data update
+
+Route::post('/product/{id}/delete',[ProductController::class , 'productRemove'])->name('productRemove');//data remove

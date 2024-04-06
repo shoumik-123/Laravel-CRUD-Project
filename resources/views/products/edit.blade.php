@@ -16,18 +16,7 @@
         </ul>
     </nav>
 
-    {{--    success alert--}}
-    @if($message = Session::get('success'))
-        <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ $message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <script>
-            setTimeout(function() {
-                $('#success-alert').alert('close');
-            }, 5000);
-        </script>
-    @endif
+
 
 
     <div class="container mx-auto">
@@ -37,7 +26,7 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
 
-                <form method="POST" action="product/{{$product->id}}/update" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('productUpdate', $product->id)  }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label"><b>Name</b></label>

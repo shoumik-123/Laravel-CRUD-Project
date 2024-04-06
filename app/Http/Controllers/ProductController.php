@@ -10,7 +10,7 @@ class ProductController extends Controller
     public function index()
     {
         return view('products.index',[
-            'products'=>Product::get()
+            'products'=>Product::all()
         ]);
     }
     public function productCreate()
@@ -47,9 +47,37 @@ class ProductController extends Controller
         $Product = Product::where('id', $ID)->first();
         return view('products.edit' ,['product'=>$Product]);
     }
-    public function productUpdate(Request $request, $ID)
+    public function productUpdate(Request $request, $id)
     {
+        //validation
+        $request ->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'img' => 'nullable|mimes:jpeg,jpg,png,gif|max:1000'
+        ]);
 
-        redirect('/');
+        $product = Product::where('id',$id)->first();
+
+
+        if (isset($request->img))
+        {
+            //upload image
+            $imageName = time().'.'.$request->img->extension();
+            $request->img->move(public_path('products'), $imageName);
+            $product->image = $imageName;
+
+        }
+
+        $product->name = $request->name;
+        $product->description = $request->description;
+
+        $product->save();
+        return redirect('/')-> withSuccess('Product Updated Successfully !!!!!!!!!!!!');
+    }
+    public function productRemove($id)
+    {
+        $product = Product::where('id',$id)->first();
+        $product->delete();
+        return back()->withSuccess('Product Delete Successfully!!!!!!!!!');
     }
 }
