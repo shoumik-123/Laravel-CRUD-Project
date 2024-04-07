@@ -24,3 +24,6 @@ Route::get('/product/{id}/edit',[ProductController::class , 'productEdit'])->nam
 Route::post('/product/{id}/update',[ProductController::class , 'productUpdate'])->name('productUpdate');//data update
 
 Route::post('/product/{id}/delete',[ProductController::class , 'productRemove'])->name('productRemove');//data remove
+
+Route::get('/product/{id}',[ProductController::class , 'singleProduct'])->name('singleProduct');//single product show
+

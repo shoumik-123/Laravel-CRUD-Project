@@ -28,7 +28,7 @@
                     <td>
                         <img src="products/{{$product->image}}" class="rounded-circle" height="50" width="50" alt="">
                     </td>
-                    <td>{{$product->name}}</td>
+                    <td><a class="text-body-emphasis text-decoration-none" href="{{ route('singleProduct' , $product->id) }}" >{{$product->name}}</a></td>
                     <td>{{$product->description}}</td>
                     <td>
                         <a href="{{ route('productEdit', $product->id) }}" class="btn btn-outline-dark btn-sm" >Edit</a>
@@ -44,6 +44,11 @@
 
             </tbody>
         </table>
+
+        <div  class="float-end mt-4">
+            {{ $products->links() }}
+        </div>
+
     </div>
 
 

@@ -7,12 +7,21 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+//    public function index()
+//    {
+//        return view('products.index',[
+//            'products'=>Product::latest()->all()    //All use korle kaj kore na latest() but get() dile kaj kore
+//        ]);
+//    }
     public function index()
     {
-        return view('products.index',[
-            'products'=>Product::all()
+        return view('products.index', [
+            'products' => Product::latest()->paginate(7)
         ]);
     }
+
+
+
     public function productCreate()
     {
         return view('products.create');
@@ -79,5 +88,11 @@ class ProductController extends Controller
         $product = Product::where('id',$id)->first();
         $product->delete();
         return back()->withSuccess('Product Delete Successfully!!!!!!!!!');
+    }
+
+    public function singleProduct($id)
+    {
+        $product = Product::where('id',$id)->first();
+        return view('products/singleProduct' , ['product' => $product]);
     }
 }
